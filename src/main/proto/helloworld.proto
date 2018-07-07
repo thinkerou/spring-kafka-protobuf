@@ -25,3 +25,10 @@ message KafkaEventOne {
 message KafkaEventTwo {
     uint64 number = 1;
 }
+
+message Callback {
+    oneof event_type {
+        KafkaEventOne one_event = 1;
+        KafkaEventTwo two_event = 2;
+    }
+}
