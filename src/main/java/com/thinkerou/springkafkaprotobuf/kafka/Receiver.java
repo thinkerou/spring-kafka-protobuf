@@ -17,6 +17,8 @@ public class Receiver {
     public void listen(ConsumerRecord<?, Callback> record) {
         Callback callback = record.value();
         logger.warn("message: {}", callback);
+        if (callback == null) return;
+
         switch (callback.getEventTypeCase()) {
             case ONE_EVENT:
                 logger.warn("one event: {}", callback.getOneEvent());

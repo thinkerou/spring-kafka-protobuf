@@ -16,8 +16,9 @@ public class CallbackDeserializer  extends Adapter implements Deserializer<Callb
         try {
             return Callback.parseFrom(data);
         } catch (InvalidProtocolBufferException e) {
-            logger.error("Received un-parse message: ", e);
-            throw new RuntimeException("Received un-parse message " + e.getMessage(), e);
+            logger.error("Received un-parse message exception and skip.");
+            return null;
+            // throw new RuntimeException("Received un-parse message " + e.getMessage(), e);
         }
     }
 }

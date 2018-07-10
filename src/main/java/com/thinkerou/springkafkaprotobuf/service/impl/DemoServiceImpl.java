@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.thinkerou.proto.helloworld.HelloRequest;
+import com.thinkerou.proto.helloworld.Callback;
+import com.thinkerou.proto.helloworld.KafkaEventOne;
+import com.thinkerou.proto.helloworld.KafkaEventTwo;
 import com.thinkerou.springkafkaprotobuf.SpringKafkaProtobufApplication;
 import com.thinkerou.springkafkaprotobuf.kafka.Sender;
 import com.thinkerou.springkafkaprotobuf.service.DemoService;
@@ -16,8 +18,9 @@ public class DemoServiceImpl implements DemoService {
     public Map<String, Object> run() {
         Map<String, Object> result = new HashMap<>();
 
-        HelloRequest request = HelloRequest.newBuilder()
-                .setName("thinkerou")
+        Callback request = Callback.newBuilder()
+                .setOneEvent(KafkaEventOne.newBuilder().setAddress("beijing").build())
+                .setTwoEvent(KafkaEventTwo.newBuilder().setNumber(123456).build())
                 .build();
 
         Sender sender = SpringKafkaProtobufApplication.context.getBean(Sender.class);
